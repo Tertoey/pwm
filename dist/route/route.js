@@ -11,7 +11,7 @@ const limiter = rateLimit({
         });
     },
 });
-router.get("/health", (req, res) => {
+router.get("/", (req, res) => {
     res.send("Server is Running");
 });
 router.post("/pwmdata", limiter, station1_w);

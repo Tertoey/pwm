@@ -15,7 +15,7 @@ const limiter: RateLimitRequestHandler = rateLimit({
   },
 });
 
-router.get("/health", (req, res) => {
+router.get("/", (req, res) => {
   res.send("Server is Running");
 });
 
