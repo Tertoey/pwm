@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "builds": [{ "src": "dist/app.js", "use": "@vercel/node" }],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/app.js",
+      "methods": ["GET", "POST"],
+      "headers": {
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST",
+        "Access-Control-Allow-Headers": "*"
+      }
+    }
+  ]
+}
