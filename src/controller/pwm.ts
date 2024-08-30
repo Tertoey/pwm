@@ -17,15 +17,15 @@ export const station1_w = async (req: Request, res: Response) => {
   const token = authHeader && authHeader.split(" ")[1];
   if (token === process.env.TOKEN) {
     try {
-      const data = req.body.input1.data.split(",");
+      const data = req.body.pm.data.split(",");
       const st1 = new Station1({
         _id: new mongoose.Types.ObjectId(),
         voltage: data[0] / 100,
-        current: parseInt(data[10]),
-        power: parseInt(data[13]),
+        current: data[10] / 100,
+        power: data[13],
         frequency: data[3] / 10,
         totalPower: parseFloat(packInt16ToInt32(data[8], data[9])),
-        timestamp: new Date(req.body.input1.ts * 1000),
+        timestamp: new Date(req.body.pm.ts * 1000),
       });
       const savedData = await st1.save();
       console.log("Data saved:", savedData);

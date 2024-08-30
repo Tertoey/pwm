@@ -6,7 +6,7 @@ import { station1_r, station1_w } from "../controller/pwm.js";
 export const router = express.Router();
 
 const limiter: RateLimitRequestHandler = rateLimit({
-  windowMs: 9 * 60 * 1000, // 10 minutes
+  windowMs: 60 * 1000, // 10 minutes
   max: 1,
   handler: (req: Request, res: Response) => {
     res.status(429).json({
@@ -16,7 +16,7 @@ const limiter: RateLimitRequestHandler = rateLimit({
 });
 
 router.get("/", (req, res) => {
-  res.send("Server is Running");
+  res.send("Server is Running V1");
 });
 
 router.post("/pwmdata", limiter, station1_w);
