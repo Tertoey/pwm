@@ -2,6 +2,8 @@ import express, { urlencoded, json, Request, Response } from "express";
 import rateLimit, { RateLimitRequestHandler } from "express-rate-limit";
 import { pwmtype } from "../type/datatype.js";
 import { station1_r, station1_w } from "../controller/pwm.js";
+import { weather_r, weather_w } from "../controller/weather.js";
+import authenticateToken from "../middleware/middleware.js";
 
 export const router = express.Router();
 
@@ -16,8 +18,12 @@ const limiter: RateLimitRequestHandler = rateLimit({
 });
 
 router.get("/", (req, res) => {
-  res.send("Server is Running V1");
+  res.send("Server is Running V2");
 });
+
+router.post("/weather", limiter, authenticateToken, weather_w);
+
+router.get("/weather", weather_r);
 
 router.post("/pwmdata", limiter, station1_w);
 
